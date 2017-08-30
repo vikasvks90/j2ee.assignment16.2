@@ -1,0 +1,26 @@
+1) HQL Select query:
+Query query=session.createQuery("from Employee");//here persistent class name is Employee
+List list=query.list();
+
+2) HQL update query: 
+Query query=session.createQuery("update Employee set name=:n where id=:i");  
+query.setParameter("n","Vinay");  
+query.setParameter("i",111);  
+  
+int status=query.executeUpdate();  
+System.out.println("Rows affected: " + status);  
+
+3) HQL delete query:
+Query query=session.createQuery("delete from Employee where id=100");   
+query.executeUpdate();  
+
+int status=query.executeUpdate();  
+System.out.println("Rows affected: " + status);
+
+4) HQL insert query:
+//HQL supports INSERT INTO clause only where records can be inserted from one object to another object
+String hql = "INSERT INTO Employee(firstName, lastName, salary)"  + 
+             "SELECT firstName, lastName, salary FROM old_employee";
+Query query = session.createQuery(hql);
+int status= query.executeUpdate();
+System.out.println("Rows affected: " + status);
